@@ -198,9 +198,9 @@ a {
   z-index: 1;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.28) 0%,
-    rgba(0, 0, 0, 0.10) 45%,
-    rgba(0, 0, 0, 0.38) 100%
+    rgba(15, 12, 10, 0.48) 0%,
+    rgba(15, 12, 10, 0.32) 45%,
+    rgba(15, 12, 10, 0.65) 100%
   );
 }
 
@@ -289,7 +289,7 @@ a {
   position: relative;
   z-index: 3;
   text-align: center;
-  padding-inline: clamp(1.5rem, 10vw, 4rem);
+  padding-inline: clamp(1.5rem, 8vw, 4rem);
   max-width: 700px;
   animation: heroFadeUp 1.4s var(--ease-out) both;
 }
@@ -303,14 +303,14 @@ a {
   font-family: var(--ff-heading);
   font-size: clamp(2rem, 8vw, 4.5rem);
   font-weight: 300;
-  color: #FAF9F6;
+  color: #FFFFFF;
   letter-spacing: 0.15em;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.4em;
   margin-bottom: 0.5rem;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.95);
 }
 
 .hero__date-dot {
@@ -332,11 +332,11 @@ a {
   font-size: clamp(1rem, 3.5vw, 1.45rem);
   font-weight: 300;
   font-style: italic;
-  color: rgba(250, 249, 246, 0.95);
+  color: #FFFFFF;
   line-height: 1.6;
   letter-spacing: 0.02em;
   margin-bottom: 1.2rem;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.95);
 }
 
 .hero__heart {
@@ -774,7 +774,8 @@ a {
   border-color: var(--clr-accent);
 }
 
-.rsvp__checkbox {
+.rsvp__checkbox,
+.rsvp__radio {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -793,6 +794,37 @@ a {
   flex-shrink: 0;
   transition: background 0.2s ease, border-color 0.2s ease;
   background: transparent;
+}
+
+.rsvp__radio-custom {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--clr-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  background: transparent;
+}
+
+.rsvp__radio-custom::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  transform: scale(0);
+  transition: transform 0.2s ease;
+}
+
+.rsvp__radio:checked + .rsvp__radio-custom {
+  border-color: var(--clr-accent);
+}
+
+.rsvp__radio:checked + .rsvp__radio-custom::after {
+  transform: scale(1);
 }
 
 .rsvp__checkbox-custom::after {
