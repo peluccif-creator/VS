@@ -40,7 +40,10 @@ try {
    INTERSECTION OBSERVER — scroll анімації
    ───────────────────────────────────────────────────────── */
 function initScrollAnimations() {
-  const targets = document.querySelectorAll(".hidden");
+  // Всі анімаційні класи
+  const targets = document.querySelectorAll(
+    ".hidden, .hidden--left, .hidden--right, .hidden--scale, .section-divider"
+  );
 
   if (!targets.length) return;
 
@@ -48,13 +51,22 @@ function initScrollAnimations() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-          observer.unobserve(entry.target); // анімувати лише один раз
+          const el = entry.target;
+
+          // Stagger для timeline items
+          if (el.classList.contains("timeline__item")) {
+            const items = [...document.querySelectorAll(".timeline__item")];
+            const idx = items.indexOf(el);
+            el.style.transitionDelay = `${idx * 0.18}s`;
+          }
+
+          el.classList.add("show");
+          observer.unobserve(el);
         }
       });
     },
     {
-      threshold: 0.12,     // 12% елемента видно — тригер
+      threshold: 0.12,
       rootMargin: "0px 0px -48px 0px",
     }
   );
@@ -252,7 +264,129 @@ function initCountdown() {
 }
 
 /* ─────────────────────────────────────────────────────────
-   SMOOTH SCROLL для Hero CTA
+   ENVELOPE SCREEN & WAX SEAL (TIKTOK REF)
+   ───────────────────────────────────────────────────────── */
+function initEnvelopeScreen() {
+  const envelopeScreen = document.getElementById("envelope-screen");
+  const openBtn        = document.getElementById("open-envelope-btn");
+  const musicAudio     = document.getElementById("bg-music");
+  const musicBtn       = document.getElementById("music-toggle");
+
+  if (!envelopeScreen || !openBtn) return;
+
+  openBtn.addEventListener("click", () => {
+    // 1. Анімація відкриття
+    envelopeScreen.classList.add("opened");
+
+    // 2. Спроба автозапуску фонової музики після жесту користувача
+    if (musicAudio) {
+      musicAudio.volume = 0.7;
+      musicAudio.load();
+      const playPromise = musicAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          if (musicBtn) musicBtn.classList.add("playing");
+        }).catch((err) => {
+          console.warn("Audio autoplay error:", err);
+        });
+      }
+    }
+
+    // 3. Видалення з DOM через 1с після анімації
+    setTimeout(() => {
+      envelopeScreen.style.display = "none";
+    }, 1000);
+  });
+}
+
+/* ─────────────────────────────────────────────────────────
+   MUSIC PLAYER
+   ───────────────────────────────────────────────────────── */
+function initMusicPlayer() {
+  const musicBtn   = document.getElementById("music-toggle");
+  const musicAudio = document.getElementById("bg-music");
+
+  if (!musicBtn || !musicAudio) return;
+
+  musicBtn.addEventListener("click", () => {
+    if (musicAudio.paused) {
+      musicAudio.volume = 0.7;
+      const playPromise = musicAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          musicBtn.classList.add("playing");
+        }).catch((err) => {
+          console.error("Audio play failed:", err);
+        });
+      }
+    } else {
+      musicAudio.pause();
+      musicBtn.classList.remove("playing");
+    }
+  });
+}
+
+/* ─────────────────────────────────────────────────────────
+   CANVAS GOLD DUST PARTICLES
+   ───────────────────────────────────────────────────────── */
+function initGoldDustCanvas() {
+  const canvas = document.getElementById("gold-dust-canvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let width, height;
+  let particles = [];
+
+  function resize() {
+    width  = canvas.width  = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+
+  const particleCount = Math.min(Math.floor(window.innerWidth / 20), 45);
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: Math.random() * 2.5 + 0.8,
+      dx: (Math.random() - 0.5) * 0.4,
+      dy: -Math.random() * 0.5 - 0.2,
+      opacity: Math.random() * 0.6 + 0.2,
+      pulse: Math.random() * 0.02 + 0.005,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach((p) => {
+      p.x += p.dx;
+      p.y += p.dy;
+      p.opacity += Math.sin(Date.now() * p.pulse) * 0.005;
+
+      if (p.y < -10) p.y = height + 10;
+      if (p.x < -10) p.x = width + 10;
+      if (p.x > width + 10) p.x = -10;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(224, 192, 128, ${Math.max(0.1, Math.min(0.8, p.opacity))})`;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = "#e8c87c";
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+}
+
+/* ─────────────────────────────────────────────────────────
+   SMOOTH SCROLL
    ───────────────────────────────────────────────────────── */
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -266,13 +400,64 @@ function initSmoothScroll() {
 }
 
 /* ─────────────────────────────────────────────────────────
-   PARALLAX — легкий ефект для Hero фото
+   ADD TO CALENDAR (.ICS / GOOGLE CALENDAR)
+   ───────────────────────────────────────────────────────── */
+function initCalendarButton() {
+  const calBtn = document.getElementById("add-to-calendar-btn");
+  if (!calBtn) return;
+
+  calBtn.addEventListener("click", () => {
+    const title       = "Весілля Олександра та Юліани 💒";
+    const details     = "Святкування весілля Олександра та Юліани у ресторані «ФАЗАН»!";
+    const location    = "Ресторан «ФАЗАН», Балаклея, вул. Миру, 291";
+    const startDate   = "20260926T140000";
+    const endDate     = "20260926T230000";
+
+    // Google Calendar URL
+    const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
+
+    window.open(googleUrl, "_blank");
+  });
+}
+
+/* ─────────────────────────────────────────────────────────
+   3D ENVELOPE TILT & GYRO PARALLAX
+   ───────────────────────────────────────────────────────── */
+function init3DEnvelopeTilt() {
+  const wrapper = document.querySelector(".envelope-screen");
+  const envelope = document.querySelector(".envelope");
+  if (!wrapper || !envelope) return;
+
+  function handleMove(e) {
+    const rect = envelope.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    const x = clientX - (rect.left + rect.width / 2);
+    const y = clientY - (rect.top + rect.height / 2);
+
+    const rotateX = -(y / (rect.height / 2)) * 14;
+    const rotateY = (x / (rect.width / 2)) * 14;
+
+    envelope.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+  }
+
+  function handleReset() {
+    envelope.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+  }
+
+  wrapper.addEventListener("mousemove", handleMove);
+  wrapper.addEventListener("mouseleave", handleReset);
+  wrapper.addEventListener("touchmove", handleMove, { passive: true });
+  wrapper.addEventListener("touchend", handleReset);
+}
+
+/* ─────────────────────────────────────────────────────────
+   PARALLAX
    ───────────────────────────────────────────────────────── */
 function initParallax() {
   const heroBg = document.querySelector(".hero__bg");
   if (!heroBg) return;
-
-  // Тільки на десктопі / якщо немає prefers-reduced-motion
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   if (window.matchMedia("(max-width: 768px)").matches) return;
 
@@ -298,6 +483,12 @@ function initParallax() {
    ІНІЦІАЛІЗАЦІЯ
    ───────────────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
+  initEnvelopeScreen();
+  initMusicPlayer();
+  initGoldDustCanvas();
+  initCalendarButton();
+  init3DEnvelopeTilt();
+
   initScrollAnimations();
   initRsvpForm();
   initCountdown();
@@ -305,7 +496,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initParallax();
 
   console.info(
-    "%c💒 Весілля Олександра та Юліани | 26.09.2026",
+    "%c💒 Весілля Олександра та Юліани | 26.09.2026 — MAX LUXE EDITION",
     "font-family:serif; font-size:16px; color:#C4A484;"
   );
 });
