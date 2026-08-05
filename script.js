@@ -77,11 +77,11 @@ function initRsvpForm() {
     e.preventDefault();
 
     // ── Валідація ──────────────────────────────────────────
-    const nameInput  = form.querySelector("#guest-name");
-    const attendSel  = form.querySelector("#guest-attendance");
+    const nameInput   = form.querySelector("#guest-name");
+    const attendRadio = form.querySelector('input[name="attendance"]:checked');
 
     const guestName  = nameInput.value.trim();
-    const attendance = attendSel.value;
+    const attendance = attendRadio ? attendRadio.value : "";
 
     if (!guestName) {
       showFieldError(nameInput, "Будь ласка, введіть ваше ім'я");
@@ -90,8 +90,8 @@ function initRsvpForm() {
     }
 
     if (!attendance) {
-      showFieldError(attendSel, "Будь ласка, оберіть відповідь");
-      attendSel.focus();
+      const radioContainer = form.querySelector('input[name="attendance"]')?.closest('.rsvp__field');
+      showFieldError(radioContainer || nameInput, "Будь ласка, оберіть відповідь");
       return;
     }
 
@@ -215,11 +215,12 @@ function initCountdown() {
   countEl.className = "hero__countdown";
   countEl.style.cssText = `
     font-family: 'Montserrat', sans-serif;
-    font-size: clamp(0.65rem, 2vw, 0.78rem);
-    font-weight: 400;
+    font-size: clamp(0.7rem, 2.2vw, 0.85rem);
+    font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(196, 164, 132, 0.75);
+    color: #FFFFFF;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
     margin-top: 0.75rem;
     margin-bottom: 0;
   `;
