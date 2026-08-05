@@ -19,6 +19,116 @@
 <body>
 
   <!-- ═══════════════════════════════════════
+       ВСТУПНИЙ ЕКРАН: LUXURY INVITATION
+  ═══════════════════════════════════════ -->
+  <div id="envelope-screen" class="envelope-screen">
+    <!-- Золоті зірки фону -->
+    <div class="env-stars" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="envelope-wrapper">
+      <div class="envelope">
+
+        <!-- Глянцевий відблиск -->
+        <div class="envelope__glare" aria-hidden="true"></div>
+
+        <!-- Кутові орнаменти -->
+        <svg class="envelope__corner envelope__corner--tl" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M2 2 L32 2 M2 2 L2 32 M6 6 L22 6 M6 6 L6 22" stroke="#C4A484" stroke-width="1" fill="none" opacity="0.8"/>
+          <circle cx="6" cy="6" r="2" fill="#C4A484" opacity="0.6"/>
+        </svg>
+        <svg class="envelope__corner envelope__corner--tr" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M58 2 L28 2 M58 2 L58 32 M54 6 L38 6 M54 6 L54 22" stroke="#C4A484" stroke-width="1" fill="none" opacity="0.8"/>
+          <circle cx="54" cy="6" r="2" fill="#C4A484" opacity="0.6"/>
+        </svg>
+        <svg class="envelope__corner envelope__corner--bl" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M2 58 L32 58 M2 58 L2 28 M6 54 L22 54 M6 54 L6 38" stroke="#C4A484" stroke-width="1" fill="none" opacity="0.8"/>
+          <circle cx="6" cy="54" r="2" fill="#C4A484" opacity="0.6"/>
+        </svg>
+        <svg class="envelope__corner envelope__corner--br" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M58 58 L28 58 M58 58 L58 28 M54 54 L38 54 M54 54 L54 38" stroke="#C4A484" stroke-width="1" fill="none" opacity="0.8"/>
+          <circle cx="54" cy="54" r="2" fill="#C4A484" opacity="0.6"/>
+        </svg>
+
+        <!-- Верхня частина: геральдика та імена -->
+        <div class="envelope__top">
+          <div class="envelope__heraldic" aria-hidden="true">
+            <svg viewBox="0 0 120 28" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="14" x2="42" y2="14" stroke="#C4A484" stroke-width="0.8" opacity="0.7"/>
+              <text x="60" y="19" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="18" fill="#C4A484" opacity="0.85">✿</text>
+              <line x1="78" y1="14" x2="120" y2="14" stroke="#C4A484" stroke-width="0.8" opacity="0.7"/>
+            </svg>
+          </div>
+          <p class="envelope__label">запрошуємо вас</p>
+          <h2 class="envelope__names">Олександр &amp; Юліана</h2>
+          <p class="envelope__tagline">на свято весілля</p>
+
+          <!-- Тонкий роздільник -->
+          <div class="envelope__rule" aria-hidden="true">
+            <span></span>
+            <svg viewBox="0 0 20 20" width="16" height="16"><path d="M10 2 L12 8 L18 8 L13 12 L15 18 L10 14 L5 18 L7 12 L2 8 L8 8 Z" fill="#C4A484" opacity="0.75"/></svg>
+            <span></span>
+          </div>
+        </div>
+
+        <!-- 3D Сургучна печатка із круговим текстом -->
+        <div class="envelope__seal-wrapper">
+          <svg class="envelope__circle-text" viewBox="0 0 200 200">
+            <path id="textPath" d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0" fill="none"/>
+            <text>
+              <textPath href="#textPath" startOffset="0%">
+                ОЛЕКСАНДР • ЮЛІАНА • 26.09.2026 • ВІДКРИТИ ЗАПРОШЕННЯ • 
+              </textPath>
+            </text>
+          </svg>
+          
+          <button id="open-envelope-btn" class="envelope__seal envelope__seal--heart-button" aria-label="Відкрити запрошення">
+            <svg class="envelope__heart-seal-svg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="waxBeigeGradient" cx="35%" cy="35%" r="70%">
+                  <stop offset="0%" stop-color="#FDE08E" />
+                  <stop offset="35%" stop-color="#D4AF37" />
+                  <stop offset="70%" stop-color="#947019" />
+                  <stop offset="100%" stop-color="#5E430B" />
+                </radialGradient>
+                <filter id="waxShadow">
+                  <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="rgba(0,0,0,0.45)"/>
+                </filter>
+              </defs>
+              <path d="M 50,84 C 12,54 2,32 16,14 C 28,0 45,8 50,20 C 55,8 72,0 84,14 C 98,32 88,54 50,84 Z" fill="url(#waxBeigeGradient)" stroke="rgba(255,255,255,0.9)" stroke-width="2" filter="url(#waxShadow)"/>
+              <!-- Хрестик на печатці -->
+              <text x="50" y="46" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" fill="rgba(255,255,255,0.85)" font-style="italic">О&amp;Ю</text>
+            </svg>
+            <span class="envelope__seal-stamp">
+              <span class="envelope__seal-click">відкрити</span>
+            </span>
+          </button>
+        </div>
+
+        <!-- Дата -->
+        <p class="envelope__date">26 · 09 · 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Частинки золотого пилу (Canvas) -->
+  <canvas id="gold-dust-canvas" aria-hidden="true"></canvas>
+
+  <!-- Плаваючий аудіоплеєр -->
+  <div id="music-player-container" class="music-player">
+    <button id="music-toggle" class="music-btn" aria-label="Увімкнути / Вимкнути музику">
+      <span class="music-btn__icon">🎵</span>
+      <span class="music-btn__waves">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+    <audio id="bg-music" src="Benson Boone - Beautiful Things (Karaoke Version).mp3" loop preload="auto"></audio>
+  </div>
+
+  <!-- ═══════════════════════════════════════
        СЕКЦІЯ 1: ГОЛОВНИЙ ЕКРАН (HERO)
   ═══════════════════════════════════════ -->
   <section id="hero" class="hero" aria-label="Головний екран запрошення">
@@ -74,6 +184,14 @@
         <span>2026</span>
       </p>
       <p class="hero__tagline">Запрошуємо розділити з нами<br />найщасливіший день нашого життя!</p>
+
+      <div class="hero__actions">
+        <button id="add-to-calendar-btn" class="btn-calendar">
+          <svg class="btn-calendar__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z" fill="currentColor"/></svg>
+          <span>Додати в Календар</span>
+        </button>
+      </div>
+
       <svg class="hero__heart" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#C4A484"/>
       </svg>
@@ -84,8 +202,10 @@
     </a>
   </section>
 
+  <div class="section-divider" aria-hidden="true"></div>
+
   <!-- ═══════════════════════════════════════
-       СЕКЦІЯ 2: ЛОКАЦІЯ
+       СЕКЦІЯ 2: ЛОКАЦІЯ (З ГЕОПОЗИЦІЄЮ)
   ═══════════════════════════════════════ -->
   <section id="location" class="section section--cream" aria-labelledby="location-heading">
     <div class="container">
@@ -105,64 +225,56 @@
         />
         <div class="venue__svg-fallback" style="display:none;" aria-hidden="true">
           <svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg" class="venue__svg">
-            <!-- Основна будівля -->
             <rect x="90" y="110" width="320" height="120" fill="none" stroke="#8B6F47" stroke-width="1.5"/>
-            <!-- Дах -->
             <path d="M75 110 L250 35 L425 110 Z" fill="none" stroke="#8B6F47" stroke-width="1.5"/>
-            <!-- Шпиль -->
             <line x1="250" y1="35" x2="250" y2="15" stroke="#8B6F47" stroke-width="1"/>
             <circle cx="250" cy="12" r="3" fill="#8B6F47"/>
-            <!-- Колони -->
             <line x1="140" y1="110" x2="140" y2="230" stroke="#8B6F47" stroke-width="1.2"/>
             <line x1="190" y1="110" x2="190" y2="230" stroke="#8B6F47" stroke-width="1.2"/>
             <line x1="310" y1="110" x2="310" y2="230" stroke="#8B6F47" stroke-width="1.2"/>
             <line x1="360" y1="110" x2="360" y2="230" stroke="#8B6F47" stroke-width="1.2"/>
-            <!-- Основні двері -->
-            <rect x="220" y="165" width="60" height="65" fill="none" stroke="#8B6F47" stroke-width="1.5" rx="30 30 0 0"/>
+            <rect x="220" y="165" width="60" height="65" fill="none" stroke="#8B6F47" stroke-width="1.5" rx="10"/>
             <circle cx="276" cy="197" r="3" fill="#8B6F47"/>
-            <!-- Вікна -->
             <rect x="108" y="130" width="42" height="35" fill="none" stroke="#8B6F47" stroke-width="1" rx="2"/>
             <line x1="129" y1="130" x2="129" y2="165" stroke="#8B6F47" stroke-width="0.7"/>
             <line x1="108" y1="147" x2="150" y2="147" stroke="#8B6F47" stroke-width="0.7"/>
             <rect x="350" y="130" width="42" height="35" fill="none" stroke="#8B6F47" stroke-width="1" rx="2"/>
             <line x1="371" y1="130" x2="371" y2="165" stroke="#8B6F47" stroke-width="0.7"/>
             <line x1="350" y1="147" x2="392" y2="147" stroke="#8B6F47" stroke-width="0.7"/>
-            <!-- Назва -->
             <text x="250" y="72" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="18" fill="#8B6F47" letter-spacing="4">«ФАЗАН»</text>
-            <!-- Земля -->
             <line x1="50" y1="230" x2="450" y2="230" stroke="#8B6F47" stroke-width="1" opacity="0.5"/>
-            <!-- Декоративні гілки ліворуч -->
-            <path d="M40 230 Q52 195 55 165 Q48 140 38 125" stroke="#C4A484" stroke-width="1.2" fill="none" opacity="0.65"/>
-            <ellipse cx="46" cy="143" rx="14" ry="6" transform="rotate(-25 46 143)" fill="#C4A484" opacity="0.38"/>
-            <ellipse cx="38" cy="185" rx="12" ry="5" transform="rotate(-40 38 185)" fill="#C4A484" opacity="0.3"/>
-            <circle cx="35" cy="120" r="3" fill="#C4A484" opacity="0.4"/>
-            <!-- Декоративні гілки праворуч -->
-            <path d="M460 230 Q448 195 445 165 Q452 140 462 125" stroke="#C4A484" stroke-width="1.2" fill="none" opacity="0.65"/>
-            <ellipse cx="454" cy="143" rx="14" ry="6" transform="rotate(25 454 143)" fill="#C4A484" opacity="0.38"/>
-            <ellipse cx="462" cy="185" rx="12" ry="5" transform="rotate(40 462 185)" fill="#C4A484" opacity="0.3"/>
-            <circle cx="465" cy="120" r="3" fill="#C4A484" opacity="0.4"/>
           </svg>
         </div>
       </figure>
 
-      <div class="venue__name hidden">«ФАЗАН»</div>
+      <div class="venue__name hidden--scale">«ФАЗАН»</div>
       <div class="venue__info hidden">
         <div class="venue__info-item">
           <svg class="venue__icon" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#8B6F47"/>
           </svg>
-          <span>Балаклея, вул. Миру, 291</span>
+          <span>Балаклея, вул. Миру, 291, Сміла, Черкаська обл.</span>
+        </div>
+
+        <div class="venue__actions">
+          <a href="https://maps.google.com/?q=6MMC%2B3R+%D0%91%D0%B0%D0%BB%D0%B0%D0%BA%D0%BB%D0%B5%D1%8F,+%D0%B2%D1%83%D0%BB.+%D0%9C%D0%B8%D1%80%D1%83,+291,+%D0%A1%D0%BC%D1%96%D0%BB%D0%B0,+%D0%A7%D0%B5%D1%80%D0%BA%D0%B0%D1%81%D1%8C%D0%BA%D0%B0+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C" target="_blank" rel="noopener" class="btn-map btn-map--google">
+            🗺️ Маршрут у Google Maps
+          </a>
+          <a href="https://waze.com/ul?q=Балаклея, вул. Миру, 291" target="_blank" rel="noopener" class="btn-map btn-map--waze">
+            🚗 Навігатор Waze
+          </a>
         </div>
       </div>
     </div>
   </section>
+
+  <div class="section-divider" aria-hidden="true"></div>
 
   <!-- ═══════════════════════════════════════
        СЕКЦІЯ 3: ТАЙМІНГ (TIMELINE)
   ═══════════════════════════════════════ -->
   <section id="timeline" class="section section--pistachio" aria-labelledby="timeline-heading">
     <div class="container">
-      <div class="section__label hidden">Розклад дня</div>
       <h2 id="timeline-heading" class="section__title hidden">Як пройде наш день</h2>
 
       <ol class="timeline" aria-label="Розклад весільного дня">
@@ -202,8 +314,40 @@
     </div>
   </section>
 
+  <div class="section-divider" aria-hidden="true"></div>
+
   <!-- ═══════════════════════════════════════
-       СЕКЦІЯ 4: ДРЕС-КОД
+       СЕКЦІЯ 4: НАША ІСТОРІЯ (LOVE STORY)
+  ═══════════════════════════════════════ -->
+  <section id="gallery" class="section section--warm" aria-labelledby="gallery-heading">
+    <div class="container">
+      <div class="section__label hidden">Love Story</div>
+      <h2 id="gallery-heading" class="section__title hidden">Наша історія</h2>
+      <p class="section__subtitle hidden">Миттєвості нашого щастя</p>
+
+      <div class="gallery__slider hidden">
+        <div class="gallery__track">
+          <div class="gallery__card">
+            <img src="photo1.jpeg" alt="Кохання з першого погляду" class="gallery__img" onerror="if (!this.dataset.retry) { this.dataset.retry='1'; this.src='photo1.jpg'; } else if (this.dataset.retry==='1') { this.dataset.retry='2'; this.src='photo1.png'; } else { this.src='hero.jpeg'; }" />
+            <span class="gallery__caption">Кохання з першого погляду</span>
+          </div>
+          <div class="gallery__card">
+            <img src="photo2.jpeg" alt="Незабутні хвилини разом" class="gallery__img" onerror="if (!this.dataset.retry) { this.dataset.retry='1'; this.src='photo2.jpg'; } else if (this.dataset.retry==='1') { this.dataset.retry='2'; this.src='photo2.png'; } else { this.src='hero.jpeg'; }" />
+            <span class="gallery__caption">Незабутні хвилини разом</span>
+          </div>
+          <div class="gallery__card">
+            <img src="photo3.jpeg" alt="Наше Так 22.06.2025" class="gallery__img" onerror="if (!this.dataset.retry) { this.dataset.retry='1'; this.src='photo3.jpg'; } else if (this.dataset.retry==='1') { this.dataset.retry='2'; this.src='photo3.png'; } else { this.src='hero.jpeg'; }" />
+            <span class="gallery__caption">Наше «Так» • 22.06.2025</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════
+       СЕКЦІЯ 5: ДРЕС-КОД
   ═══════════════════════════════════════ -->
   <section id="dresscode" class="section section--cream" aria-labelledby="dresscode-heading">
     <div class="container">
@@ -239,7 +383,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       СЕКЦІЯ 5: ПОБАЖАННЯ
+       СЕКЦІЯ 6: ПОБАЖАННЯ
   ═══════════════════════════════════════ -->
   <section id="wishes" class="section section--warm" aria-labelledby="wishes-heading">
     <div class="container">
@@ -251,7 +395,8 @@
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#C4A484"/>
         </svg>
         <p class="wishes__text">
-          Просимо вас не дарувати нам квіти, на жаль ми не встигнемо насолодитися їх красою.
+          <strong>Дорогі гості!</strong><br /><br />
+          Найцінніший подарунок для нас — ваша присутність у цей особливий день. 🤍
         </p>
       </div>
 
@@ -264,14 +409,15 @@
           <path d="M20 3H4v10c0 4.42 3.58 8 8 8s8-3.58 8-8V3zm-8 14c-2.21 0-4-1.79-4-4v-4h8v4c0 2.21-1.79 4-4 4z" fill="#8B6F47"/>
         </svg>
         <p class="wishes__text">
-          Приємним компліментом для нас буде, якщо ви замість квітів вирішите подарувати нам пляшку вашого улюбленого алкогольного напою для нашої колекції, яку ми відкриємо на найближчому нашому сімейному святі.
+          Квіти — це завжди красиво, але, на жаль, їхня краса недовговічна. Якщо бажаєте зробити нам маленький приємний сюрприз, замість букета можете подарувати пляшечку алкоголю на власний смак.<br /><br />
+          Будемо вдячні, якщо підпишете пляшечку: від кого вона та з якої нагоди нам її відкрити. Це зробить наші майбутні свята ще теплішими та особливішими. 🥂
         </p>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════
-       СЕКЦІЯ 6: RSVP ФОРМА
+       СЕКЦІЯ 7: RSVP ФОРМА
   ═══════════════════════════════════════ -->
   <section id="rsvp" class="section section--dark" aria-labelledby="rsvp-heading">
     <div class="container container--narrow">
@@ -364,7 +510,7 @@
        FOOTER
   ═══════════════════════════════════════ -->
   <footer class="footer" role="contentinfo">
-    <p class="footer__calligraphy">Олександр &amp; Юліана</p>
+    <div class="footer__monogram" aria-hidden="true">О &amp; Ю</div>
     <p class="footer__date">26 · 09 · 2026</p>
     <svg class="footer__heart" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
       <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#C4A484"/>
