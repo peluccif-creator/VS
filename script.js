@@ -309,3 +309,4 @@ document.addEventListener("DOMContentLoaded", () => {
     "font-family:serif; font-size:16px; color:#C4A484;"
   );
 });
+ 
