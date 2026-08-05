@@ -95,17 +95,16 @@
         Виїзна церемонія та банкет
       </h2>
       <p class="section__subtitle hidden">відбудуться у ресторані</p>
-      <div class="section__ornament hidden" aria-hidden="true">✦</div>
 
       <!-- Ілюстрація будівлі -->
       <figure class="venue__figure hidden">
         <img
           src="venue-sketch.jpeg"
-          alt="Лінійна ілюстрація ресторану ФАЗАН"
+          alt="Ілюстрація ресторану ФАЗАН"
           class="venue-illustration"
-          onerror="this.style.display='none'; this.parentElement.querySelector('.venue__svg-fallback').style.display='block';"
+          onerror="if (!this.dataset.retry) { this.dataset.retry = '1'; this.src = 'venue-sketch.jpg'; } else if (this.dataset.retry === '1') { this.dataset.retry = '2'; this.src = 'venue-sketch.png'; } else { this.style.display='none'; this.parentElement.querySelector('.venue__svg-fallback').style.display='block'; }"
         />
-        <div class="venue__svg-fallback" style="display:block;" aria-hidden="true">
+        <div class="venue__svg-fallback" style="display:none;" aria-hidden="true">
           <svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg" class="venue__svg">
             <!-- Основна будівля -->
             <rect x="90" y="110" width="320" height="120" fill="none" stroke="#8B6F47" stroke-width="1.5"/>
@@ -166,7 +165,6 @@
     <div class="container">
       <div class="section__label hidden">Розклад дня</div>
       <h2 id="timeline-heading" class="section__title hidden">Як пройде наш день</h2>
-      <div class="section__ornament hidden" aria-hidden="true">✦</div>
 
       <ol class="timeline" aria-label="Розклад весільного дня">
         <li class="timeline__item hidden">
@@ -177,7 +175,7 @@
           </div>
           <div class="timeline__content">
             <h3 class="timeline__title">Збір гостей</h3>
-            <p class="timeline__desc">Зустріч гостей, музика та аперитив</p>
+            <p class="timeline__desc">Зустріч, легкий welcome та гарний настрій</p>
           </div>
         </li>
         <li class="timeline__item hidden">
@@ -187,8 +185,8 @@
             <div class="timeline__line"></div>
           </div>
           <div class="timeline__content">
-            <h3 class="timeline__title">Початок церемонії</h3>
-            <p class="timeline__desc">Виїзна церемонія одруження</p>
+            <h3 class="timeline__title">Церемонія</h3>
+            <p class="timeline__desc">Момент, коли ми скажемо одне одному «Так»</p>
           </div>
         </li>
         <li class="timeline__item hidden">
@@ -197,8 +195,8 @@
             <div class="timeline__dot timeline__dot--last"></div>
           </div>
           <div class="timeline__content">
-            <h3 class="timeline__title">Банкет</h3>
-            <p class="timeline__desc">Святковий обід, танці та незабутні моменти</p>
+            <h3 class="timeline__title">Святковий банкет</h3>
+            <p class="timeline__desc">Смачні страви, щирі тости, традиції, конкурси, танці та незабутні емоції</p>
           </div>
         </li>
       </ol>
@@ -212,7 +210,6 @@
     <div class="container">
       <div class="section__label hidden">Дрес-код</div>
       <h2 id="dresscode-heading" class="section__title hidden">Кольорова гама</h2>
-      <div class="section__ornament hidden" aria-hidden="true">✦</div>
 
       <p class="dresscode__text hidden">
         Будемо вдячні, якщо ви підтримаєте<br />кольорову гаму нашого весілля:
@@ -249,7 +246,6 @@
     <div class="container">
       <div class="section__label hidden">Побажання</div>
       <h2 id="wishes-heading" class="section__title hidden">Наші побажання</h2>
-      <div class="section__ornament hidden" aria-hidden="true">✦</div>
 
       <div class="wishes__block hidden">
         <svg class="wishes__heart" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -261,7 +257,7 @@
       </div>
 
       <div class="wishes__divider hidden" aria-hidden="true">
-        <span></span><span class="wishes__divider-icon">✦</span><span></span>
+        <span></span>
       </div>
 
       <div class="wishes__block hidden">
@@ -280,14 +276,12 @@
   ═══════════════════════════════════════ -->
   <section id="rsvp" class="section section--dark" aria-labelledby="rsvp-heading">
     <div class="container container--narrow">
-      <div class="section__label section__label--light hidden">RSVP</div>
       <h2 id="rsvp-heading" class="section__title section__title--light hidden">
         Підтвердження присутності
       </h2>
       <p class="rsvp__subtitle hidden">
-        Будь ласка, підтвердьте вашу присутність<br />до <strong>01.09.2026</strong>
+        Будь ласка, підтвердьте вашу присутність<br />до <strong>25.08.2026</strong>
       </p>
-      <div class="section__ornament section__ornament--light hidden" aria-hidden="true">✦</div>
 
       <form id="rsvp-form" class="rsvp__form hidden" novalidate aria-label="Форма підтвердження присутності">
         <div class="rsvp__field">
@@ -304,16 +298,18 @@
         </div>
 
         <div class="rsvp__field">
-          <label class="rsvp__label" for="guest-attendance">Чи зможете ви бути присутніми?</label>
-          <div class="rsvp__select-wrapper">
-            <select id="guest-attendance" name="attendance" class="rsvp__select" required>
-              <option value="" disabled selected>Оберіть відповідь</option>
-              <option value="yes">Звісно буду! 🥂</option>
-              <option value="no">На жаль, не зможу 😢</option>
-            </select>
-            <svg class="rsvp__select-arrow" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7 10l5 5 5-5z" fill="#8B6F47"/>
-            </svg>
+          <label class="rsvp__label">Чи зможете ви бути присутніми?</label>
+          <div class="rsvp__drinks-grid">
+            <label class="rsvp__drink-option">
+              <input type="radio" name="attendance" value="yes" class="rsvp__radio" required />
+              <span class="rsvp__radio-custom"></span>
+              <span class="rsvp__drink-name">Звісно буду! 🥂</span>
+            </label>
+            <label class="rsvp__drink-option">
+              <input type="radio" name="attendance" value="no" class="rsvp__radio" required />
+              <span class="rsvp__radio-custom"></span>
+              <span class="rsvp__drink-name">На жаль, не зможу 😢</span>
+            </label>
           </div>
         </div>
 
