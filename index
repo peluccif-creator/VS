@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Запрошення на весілля Олександра та Юліани — 26 вересня 2026 року, ресторан «ФАЗАН», Балаклея." />
+  <title>Весілля Олександра та Юліани | 26.09.2026</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       СЕКЦІЯ 1: ГОЛОВНИЙ ЕКРАН (HERO)
+  ═══════════════════════════════════════ -->
+  <section id="hero" class="hero" aria-label="Головний екран запрошення">
+    <div class="hero__overlay"></div>
+    <div class="hero__photo-container">
+      <img
+        src="hero.jpeg"
+        alt="Олександр та Юліана — наречені"
+        class="hero__bg"
+        fetchpriority="high"
+        onerror="if (!this.dataset.retry) { this.dataset.retry = '1'; this.src = 'hero.jpg'; } else if (this.dataset.retry === '1') { this.dataset.retry = '2'; this.src = 'hero.png'; } else if (this.dataset.retry === '2') { this.dataset.retry = '3'; this.src = 'photo.jpg'; }"
+      />
+    </div>
+
+    <!-- Декоративні SVG-гілочки (boho) -->
+    <div class="hero__botanical hero__botanical--left" aria-hidden="true">
+      <svg viewBox="0 0 120 400" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 400 Q40 300 20 220 Q5 160 25 100 Q45 40 60 0" stroke="#C4A484" stroke-width="1.5" fill="none" opacity="0.55"/>
+        <ellipse cx="33" cy="190" rx="22" ry="10" transform="rotate(-30 33 190)" fill="#C4A484" opacity="0.3"/>
+        <ellipse cx="18" cy="140" rx="16" ry="8" transform="rotate(-50 18 140)" fill="#C4A484" opacity="0.25"/>
+        <ellipse cx="42" cy="250" rx="18" ry="9" transform="rotate(-20 42 250)" fill="#C4A484" opacity="0.28"/>
+        <ellipse cx="48" cy="80" rx="13" ry="6" transform="rotate(-60 48 80)" fill="#C4A484" opacity="0.22"/>
+        <circle cx="15" cy="110" r="3.5" fill="#C4A484" opacity="0.35"/>
+        <circle cx="28" cy="165" r="2.5" fill="#C4A484" opacity="0.3"/>
+        <circle cx="44" cy="220" r="2" fill="#C4A484" opacity="0.25"/>
+        <circle cx="20" cy="310" r="4" fill="#C4A484" opacity="0.3"/>
+        <ellipse cx="10" cy="280" rx="14" ry="7" transform="rotate(-40 10 280)" fill="#C4A484" opacity="0.22"/>
+      </svg>
+    </div>
+    <div class="hero__botanical hero__botanical--right" aria-hidden="true">
+      <svg viewBox="0 0 120 400" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 400 Q80 300 100 220 Q115 160 95 100 Q75 40 60 0" stroke="#C4A484" stroke-width="1.5" fill="none" opacity="0.55"/>
+        <ellipse cx="87" cy="190" rx="22" ry="10" transform="rotate(30 87 190)" fill="#C4A484" opacity="0.3"/>
+        <ellipse cx="102" cy="140" rx="16" ry="8" transform="rotate(50 102 140)" fill="#C4A484" opacity="0.25"/>
+        <ellipse cx="78" cy="250" rx="18" ry="9" transform="rotate(20 78 250)" fill="#C4A484" opacity="0.28"/>
+        <ellipse cx="72" cy="80" rx="13" ry="6" transform="rotate(60 72 80)" fill="#C4A484" opacity="0.22"/>
+        <circle cx="105" cy="110" r="3.5" fill="#C4A484" opacity="0.35"/>
+        <circle cx="92" cy="165" r="2.5" fill="#C4A484" opacity="0.3"/>
+        <circle cx="76" cy="220" r="2" fill="#C4A484" opacity="0.25"/>
+        <circle cx="100" cy="310" r="4" fill="#C4A484" opacity="0.3"/>
+        <ellipse cx="110" cy="280" rx="14" ry="7" transform="rotate(40 110 280)" fill="#C4A484" opacity="0.22"/>
+      </svg>
+    </div>
+
+    <div class="hero__content">
+      <h1 class="hero__names">Олександр &amp; Юліана</h1>
+      <div class="hero__divider" aria-hidden="true"></div>
+      <p class="hero__date" aria-label="Дата весілля">
+        <span>26</span>
+        <span class="hero__date-dot">•</span>
+        <span>09</span>
+        <span class="hero__date-dot">•</span>
+        <span>2026</span>
+      </p>
+      <p class="hero__tagline">Запрошуємо розділити з нами<br />найщасливіший день нашого життя!</p>
+      <svg class="hero__heart" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#C4A484"/>
+      </svg>
+    </div>
+
+    <a href="#location" class="hero__scroll-indicator" aria-label="Прокрутити вниз">
+      <span class="hero__scroll-arrow"></span>
+    </a>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       СЕКЦІЯ 2: ЛОКАЦІЯ
+  ═══════════════════════════════════════ -->
+  <section id="location" class="section section--cream" aria-labelledby="location-heading">
+    <div class="container">
+      <div class="section__label hidden">Місце проведення</div>
+      <h2 id="location-heading" class="section__title hidden">
+        Виїзна церемонія та банкет
+      </h2>
+      <p class="section__subtitle hidden">відбудуться у ресторані</p>
+      <div class="section__ornament hidden" aria-hidden="true">✦</div>
+
+      <!-- Ілюстрація будівлі -->
+      <figure class="venue__figure hidden">
+        <img
+          src="venue-sketch.jpeg"
+          alt="Ілюстрація ресторану ФАЗАН"
+          class="venue-illustration"
+          onerror="if (!this.dataset.retry) { this.dataset.retry = '1'; this.src = 'venue-sketch.jpg'; } else if (this.dataset.retry === '1') { this.dataset.retry = '2'; this.src = 'venue-sketch.png'; } else { this.style.display='none'; this.parentElement.querySelector('.venue__svg-fallback').style.display='block'; }"
+        />
+        <div class="venue__svg-fallback" style="display:none;" aria-hidden="true">
+          <svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg" class="venue__svg">
+            <!-- Основна будівля -->
+            <rect x="90" y="110" width="320" height="120" fill="none" stroke="#8B6F47" stroke-width="1.5"/>
+            <!-- Дах -->
+            <path d="M75 110 L250 35 L425 110 Z" fill="none" stroke="#8B6F47" stroke-width="1.5"/>
+            <!-- Шпиль -->
+            <line x1="250" y1="35" x2="250" y2="15" stroke="#8B6F47" stroke-width="1"/>
+            <circle cx="250" cy="12" r="3" fill="#8B6F47"/>
+            <!-- Колони -->
+            <line x1="140" y1="110" x2="140" y2="230" stroke="#8B6F47" stroke-width="1.2"/>
+            <line x1="190" y1="110" x2="190" y2="230" stroke="#8B6F47" stroke-width="1.2"/>
+            <line x1="310" y1="110" x2="310" y2="230" stroke="#8B6F47" stroke-width="1.2"/>
+            <line x1="360" y1="110" x2="360" y2="230" stroke="#8B6F47" stroke-width="1.2"/>
+            <!-- Основні двері -->
+            <rect x="220" y="165" width="60" height="65" fill="none" stroke="#8B6F47" stroke-width="1.5" rx="30 30 0 0"/>
+            <circle cx="276" cy="197" r="3" fill="#8B6F47"/>
+            <!-- Вікна -->
+            <rect x="108" y="130" width="42" height="35" fill="none" stroke="#8B6F47" stroke-width="1" rx="2"/>
+            <line x1="129" y1="130" x2="129" y2="165" stroke="#8B6F47" stroke-width="0.7"/>
+            <line x1="108" y1="147" x2="150" y2="147" stroke="#8B6F47" stroke-width="0.7"/>
+            <rect x="350" y="130" width="42" height="35" fill="none" stroke="#8B6F47" stroke-width="1" rx="2"/>
+            <line x1="371" y1="130" x2="371" y2="165" stroke="#8B6F47" stroke-width="0.7"/>
+            <line x1="350" y1="147" x2="392" y2="147" stroke="#8B6F47" stroke-width="0.7"/>
+            <!-- Назва -->
+            <text x="250" y="72" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="18" fill="#8B6F47" letter-spacing="4">«ФАЗАН»</text>
+            <!-- Земля -->
+            <line x1="50" y1="230" x2="450" y2="230" stroke="#8B6F47" stroke-width="1" opacity="0.5"/>
+            <!-- Декоративні гілки ліворуч -->
+            <path d="M40 230 Q52 195 55 165 Q48 140 38 125" stroke="#C4A484" stroke-width="1.2" fill="none" opacity="0.65"/>
+            <ellipse cx="46" cy="143" rx="14" ry="6" transform="rotate(-25 46 143)" fill="#C4A484" opacity="0.38"/>
+            <ellipse cx="38" cy="185" rx="12" ry="5" transform="rotate(-40 38 185)" fill="#C4A484" opacity="0.3"/>
+            <circle cx="35" cy="120" r="3" fill="#C4A484" opacity="0.4"/>
+            <!-- Декоративні гілки праворуч -->
+            <path d="M460 230 Q448 195 445 165 Q452 140 462 125" stroke="#C4A484" stroke-width="1.2" fill="none" opacity="0.65"/>
+            <ellipse cx="454" cy="143" rx="14" ry="6" transform="rotate(25 454 143)" fill="#C4A484" opacity="0.38"/>
+            <ellipse cx="462" cy="185" rx="12" ry="5" transform="rotate(40 462 185)" fill="#C4A484" opacity="0.3"/>
+            <circle cx="465" cy="120" r="3" fill="#C4A484" opacity="0.4"/>
+          </svg>
+        </div>
+      </figure>
+
+      <div class="venue__name hidden">«ФАЗАН»</div>
+      <div class="venue__info hidden">
+        <div class="venue__info-item">
+          <svg class="venue__icon" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#8B6F47"/>
+          </svg>
+          <span>Балаклея, вул. Миру, 291</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       СЕКЦІЯ 3: ТАЙМІНГ (TIMELINE)
+  ═══════════════════════════════════════ -->
+  <section id="timeline" class="section section--pistachio" aria-labelledby="timeline-heading">
+    <div class="container">
+      <div class="section__label hidden">Розклад дня</div>
+      <h2 id="timeline-heading" class="section__title hidden">Як пройде наш день</h2>
+      <div class="section__ornament hidden" aria-hidden="true">✦</div>
+
+      <ol class="timeline" aria-label="Розклад весільного дня">
+        <li class="timeline__item hidden">
+          <div class="timeline__time" aria-hidden="true">14:00</div>
+          <div class="timeline__connector" aria-hidden="true">
+            <div class="timeline__dot"></div>
+            <div class="timeline__line"></div>
+          </div>
+          <div class="timeline__content">
+            <h3 class="timeline__title">Збір гостей</h3>
+            <p class="timeline__desc">Зустріч гостей, музика та аперитив</p>
+          </div>
+        </li>
+        <li class="timeline__item hidden">
+          <div class="timeline__time" aria-hidden="true">14:30</div>
+          <div class="timeline__connector" aria-hidden="true">
+            <div class="timeline__dot"></div>
+            <div class="timeline__line"></div>
+          </div>
+          <div class="timeline__content">
+            <h3 class="timeline__title">Початок церемонії</h3>
+            <p class="timeline__desc">Виїзна церемонія одруження</p>
+          </div>
+        </li>
+        <li class="timeline__item hidden">
+          <div class="timeline__time" aria-hidden="true">15:30</div>
+          <div class="timeline__connector" aria-hidden="true">
+            <div class="timeline__dot timeline__dot--last"></div>
+          </div>
+          <div class="timeline__content">
+            <h3 class="timeline__title">Банкет</h3>
+            <p class="timeline__desc">Святковий обід, танці та незабутні моменти</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       СЕКЦІЯ 4: ДРЕС-КОД
+  ═══════════════════════════════════════ -->
+  <section id="dresscode" class="section section--cream" aria-labelledby="dresscode-heading">
+    <div class="container">
+      <div class="section__label hidden">Дрес-код</div>
+      <h2 id="dresscode-heading" class="section__title hidden">Кольорова гама</h2>
+      <div class="section__ornament hidden" aria-hidden="true">✦</div>
+
+      <p class="dresscode__text hidden">
+        Будемо вдячні, якщо ви підтримаєте<br />кольорову гаму нашого весілля:
+      </p>
+
+      <div class="dresscode__palette hidden" role="list" aria-label="Кольорова палітра дрес-коду">
+        <div class="dresscode__swatch" style="--color: #FFFFFF; --border: #D4C3B1;" role="listitem">
+          <div class="dresscode__circle" aria-label="Білий"></div>
+        </div>
+        <div class="dresscode__swatch" style="--color: #E6D5C3; --border: #C4A484;" role="listitem">
+          <div class="dresscode__circle" aria-label="Бежевий"></div>
+        </div>
+        <div class="dresscode__swatch" style="--color: #C4A484; --border: #9E7D5A;" role="listitem">
+          <div class="dresscode__circle" aria-label="Карамельний"></div>
+        </div>
+        <div class="dresscode__swatch" style="--color: #5C4033; --border: #3A2820;" role="listitem">
+          <div class="dresscode__circle" aria-label="Шоколадний"></div>
+        </div>
+        <div class="dresscode__swatch" style="--color: #000000; --border: #333333;" role="listitem">
+          <div class="dresscode__circle" aria-label="Чорний"></div>
+        </div>
+      </div>
+
+      <p class="dresscode__style hidden">
+        <em>Old Money · Classic · Boho</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       СЕКЦІЯ 5: ПОБАЖАННЯ
+  ═══════════════════════════════════════ -->
+  <section id="wishes" class="section section--warm" aria-labelledby="wishes-heading">
+    <div class="container">
+      <div class="section__label hidden">Побажання</div>
+      <h2 id="wishes-heading" class="section__title hidden">Наші побажання</h2>
+      <div class="section__ornament hidden" aria-hidden="true">✦</div>
+
+      <div class="wishes__block hidden">
+        <svg class="wishes__heart" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#C4A484"/>
+        </svg>
+        <p class="wishes__text">
+          Просимо вас не дарувати нам квіти, на жаль ми не встигнемо насолодитися їх красою.
+        </p>
+      </div>
+
+      <div class="wishes__divider hidden" aria-hidden="true">
+        <span></span><span class="wishes__divider-icon">✦</span><span></span>
+      </div>
+
+      <div class="wishes__block hidden">
+        <svg class="wishes__wine-icon" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 3H4v10c0 4.42 3.58 8 8 8s8-3.58 8-8V3zm-8 14c-2.21 0-4-1.79-4-4v-4h8v4c0 2.21-1.79 4-4 4z" fill="#8B6F47"/>
+        </svg>
+        <p class="wishes__text">
+          Приємним компліментом для нас буде, якщо ви замість квітів вирішите подарувати нам пляшку вашого улюбленого алкогольного напою для нашої колекції, яку ми відкриємо на найближчому нашому сімейному святі.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       СЕКЦІЯ 6: RSVP ФОРМА
+  ═══════════════════════════════════════ -->
+  <section id="rsvp" class="section section--dark" aria-labelledby="rsvp-heading">
+    <div class="container container--narrow">
+      <div class="section__label section__label--light hidden">RSVP</div>
+      <h2 id="rsvp-heading" class="section__title section__title--light hidden">
+        Підтвердження присутності
+      </h2>
+      <p class="rsvp__subtitle hidden">
+        Будь ласка, підтвердьте вашу присутність<br />до <strong>01.09.2026</strong>
+      </p>
+      <div class="section__ornament section__ornament--light hidden" aria-hidden="true">✦</div>
+
+      <form id="rsvp-form" class="rsvp__form hidden" novalidate aria-label="Форма підтвердження присутності">
+        <div class="rsvp__field">
+          <label class="rsvp__label" for="guest-name">Ваше Ім'я та Прізвище</label>
+          <input
+            type="text"
+            id="guest-name"
+            name="name"
+            class="rsvp__input"
+            placeholder="Іванченко Марія"
+            required
+            autocomplete="name"
+          />
+        </div>
+
+        <div class="rsvp__field">
+          <label class="rsvp__label" for="guest-attendance">Чи зможете ви бути присутніми?</label>
+          <div class="rsvp__select-wrapper">
+            <select id="guest-attendance" name="attendance" class="rsvp__select" required>
+              <option value="" disabled selected>Оберіть відповідь</option>
+              <option value="yes">Звісно буду! 🥂</option>
+              <option value="no">На жаль, не зможу 😢</option>
+            </select>
+            <svg class="rsvp__select-arrow" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 10l5 5 5-5z" fill="#8B6F47"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="rsvp__field">
+          <label class="rsvp__label">Яким напоям віддаєте перевагу?</label>
+          <div class="rsvp__drinks-grid">
+            <label class="rsvp__drink-option">
+              <input type="checkbox" name="drinks" value="Коньяк" class="rsvp__checkbox" />
+              <span class="rsvp__checkbox-custom"></span>
+              <span class="rsvp__drink-name">Коньяк</span>
+            </label>
+            <label class="rsvp__drink-option">
+              <input type="checkbox" name="drinks" value="Горілка" class="rsvp__checkbox" />
+              <span class="rsvp__checkbox-custom"></span>
+              <span class="rsvp__drink-name">Горілка</span>
+            </label>
+            <label class="rsvp__drink-option">
+              <input type="checkbox" name="drinks" value="Вино" class="rsvp__checkbox" />
+              <span class="rsvp__checkbox-custom"></span>
+              <span class="rsvp__drink-name">Вино</span>
+            </label>
+            <label class="rsvp__drink-option">
+              <input type="checkbox" name="drinks" value="Шампанське" class="rsvp__checkbox" />
+              <span class="rsvp__checkbox-custom"></span>
+              <span class="rsvp__drink-name">Шампанське</span>
+            </label>
+            <label class="rsvp__drink-option">
+              <input type="checkbox" name="drinks" value="Безалкогольні напої" class="rsvp__checkbox" />
+              <span class="rsvp__checkbox-custom"></span>
+              <span class="rsvp__drink-name">Безалкогольні напої</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" id="rsvp-submit" class="rsvp__btn">
+          <span class="rsvp__btn-text">Підтвердити</span>
+          <svg class="rsvp__btn-icon" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"/>
+          </svg>
+        </button>
+
+        <!-- Повідомлення про успіх -->
+        <div id="rsvp-success" class="rsvp__success" role="alert" aria-live="polite" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#C4A484"/>
+          </svg>
+          <p class="rsvp__success-text"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <p class="footer__calligraphy">Олександр &amp; Юліана</p>
+    <p class="footer__date">26 · 09 · 2026</p>
+    <svg class="footer__heart" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#C4A484"/>
+    </svg>
+  </footer>
+
+  <!-- Firebase SDK v10 (ESM module) -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
