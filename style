@@ -1,0 +1,1003 @@
+/* ============================================================
+   ВЕСІЛЬНИЙ САЙТ — ОЛЕКСАНДР & ЮЛІАНА | 26.09.2026
+   style.css  •  Mobile First  •  Boho / Classic
+   ============================================================ */
+
+/* ─── DESIGN TOKENS ─────────────────────────────────────── */
+:root {
+  /* Colours */
+  --clr-bg:          #FAF9F6;
+  --clr-cream:       #F5F0E8;
+  --clr-pistachio:   #EEE8DC;
+  --clr-warm:        #F0E8DC;
+  --clr-dark:        #1A1410;
+  --clr-dark-sec:    #231C17;
+
+  --clr-text:        #2C2C2C;
+  --clr-text-muted:  #6B5C4E;
+  --clr-text-light:  #FAF9F6;
+
+  --clr-accent:      #C4A484;
+  --clr-accent-dark: #8B6F47;
+  --clr-accent-deep: #5C4033;
+
+  /* Dress-code palette */
+  --dc-white:     #FFFFFF;
+  --dc-beige:     #E6D5C3;
+  --dc-caramel:   #C4A484;
+  --dc-choco:     #5C4033;
+  --dc-black:     #000000;
+
+  /* Typography */
+  --ff-heading:   'Cormorant Garamond', Georgia, serif;
+  --ff-body:      'Montserrat', 'Helvetica Neue', sans-serif;
+  --ff-calligraphy: 'Great Vibes', cursive;
+
+  /* Spacing */
+  --section-py:   clamp(4rem, 10vw, 8rem);
+  --container-px: clamp(1.25rem, 5vw, 2.5rem);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-slow: 0.85s;
+  --dur-med:  0.55s;
+}
+
+/* ─── RESET & BASE ──────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--ff-body);
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─── SCROLL ANIMATIONS ─────────────────────────────────── */
+.hidden {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+.hidden.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children delays */
+.hidden:nth-child(2) { transition-delay: 0.1s; }
+.hidden:nth-child(3) { transition-delay: 0.2s; }
+.hidden:nth-child(4) { transition-delay: 0.3s; }
+.hidden:nth-child(5) { transition-delay: 0.4s; }
+
+/* ─── LAYOUT HELPERS ────────────────────────────────────── */
+.container {
+  width: min(700px, 100%);
+  margin-inline: auto;
+  padding-inline: var(--container-px);
+  text-align: center;
+}
+
+.container--narrow {
+  width: min(540px, 100%);
+}
+
+.section {
+  padding-block: var(--section-py);
+  position: relative;
+  overflow: hidden;
+}
+
+.section--cream     { background-color: var(--clr-cream); }
+.section--pistachio { background-color: var(--clr-pistachio); }
+.section--warm      { background-color: var(--clr-warm); }
+.section--dark      { background-color: var(--clr-dark); }
+
+/* ─── SECTION TYPOGRAPHY ────────────────────────────────── */
+.section__label {
+  font-family: var(--ff-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--clr-accent-dark);
+  margin-bottom: 0.75rem;
+}
+
+.section__label--light {
+  color: var(--clr-accent);
+}
+
+.section__title {
+  font-family: var(--ff-heading);
+  font-size: clamp(1.9rem, 6vw, 3.2rem);
+  font-weight: 400;
+  color: var(--clr-text);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.section__title--light { color: var(--clr-text-light); }
+
+.section__subtitle {
+  font-family: var(--ff-body);
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.section__ornament {
+  font-size: 0.8rem;
+  color: var(--clr-accent);
+  margin-block: 1.2rem;
+  letter-spacing: 0.5em;
+}
+
+.section__ornament--light { color: var(--clr-accent); }
+
+/* ─── SECTION 1: HERO ───────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--clr-bg);
+}
+
+.hero__photo-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.28) 0%,
+    rgba(0, 0, 0, 0.10) 45%,
+    rgba(0, 0, 0, 0.38) 100%
+  );
+}
+
+/* ─── Desktop Split Arch Hero (≥ 860px) ─────────────────── */
+@media (min-width: 860px) {
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    align-items: center;
+    gap: 3rem;
+    padding-inline: max(3rem, 6vw);
+    padding-block: 3rem;
+  }
+
+  .hero__overlay {
+    display: none;
+  }
+
+  .hero__photo-container {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-width: 440px;
+    height: clamp(480px, 78vh, 660px);
+    justify-self: end;
+    border-radius: 220px 220px 24px 24px; /* Boho Arch Frame */
+    overflow: hidden;
+    box-shadow: 0 16px 45px rgba(44, 44, 44, 0.14);
+    border: 6px solid #FAF9F6;
+    z-index: 2;
+  }
+
+  .hero__content {
+    text-align: left;
+    padding-inline: 0;
+    justify-self: start;
+    max-width: 520px;
+  }
+
+  .hero__date,
+  .hero__tagline,
+  .hero__names,
+  .hero__subtitle {
+    color: var(--clr-text) !important;
+    text-shadow: none !important;
+  }
+
+  .hero__date {
+    justify-content: flex-start;
+  }
+
+  .hero__divider {
+    margin-inline: 0;
+  }
+
+  .hero__heart {
+    margin-inline: 0;
+  }
+
+  .hero__subtitle {
+    color: var(--clr-accent-dark) !important;
+  }
+}
+
+/* Botanical overlays */
+.hero__botanical {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: clamp(70px, 15vw, 140px);
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero__botanical--left  { left: 0; }
+.hero__botanical--right { right: 0; }
+
+.hero__botanical svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Hero content */
+.hero__content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding-inline: clamp(1.5rem, 10vw, 4rem);
+  max-width: 700px;
+  animation: heroFadeUp 1.4s var(--ease-out) both;
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero__date {
+  font-family: var(--ff-heading);
+  font-size: clamp(2rem, 8vw, 4.5rem);
+  font-weight: 300;
+  color: #FAF9F6;
+  letter-spacing: 0.15em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+.hero__date-dot {
+  color: var(--clr-accent);
+  font-size: 0.5em;
+}
+
+.hero__divider {
+  width: 60px;
+  height: 1px;
+  background: var(--clr-accent);
+  margin-inline: auto;
+  margin-block: 1rem;
+  opacity: 0.8;
+}
+
+.hero__tagline {
+  font-family: var(--ff-heading);
+  font-size: clamp(1rem, 3.5vw, 1.45rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(250, 249, 246, 0.95);
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+.hero__heart {
+  width: 22px;
+  height: 22px;
+  margin-inline: auto;
+  margin-bottom: 1rem;
+  animation: heartBeat 2.4s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  14%       { transform: scale(1.18); }
+  28%       { transform: scale(1); }
+  42%       { transform: scale(1.1); }
+  56%       { transform: scale(1); }
+}
+
+.hero__names {
+  font-family: var(--ff-calligraphy);
+  font-size: clamp(2.8rem, 9vw, 5.5rem);
+  font-weight: 400;
+  color: #FAF9F6;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.7), 0 2px 6px rgba(0,0,0,0.8);
+}
+
+.hero__subtitle {
+  font-family: var(--ff-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Scroll indicator */
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.hero__scroll-arrow {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-right: 1.5px solid var(--clr-accent);
+  border-bottom: 1.5px solid var(--clr-accent);
+  transform: rotate(45deg);
+  opacity: 0.7;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ─── SECTION 2: VENUE / LOCATION ───────────────────────── */
+.venue__figure {
+  margin-block: 1.5rem 1rem;
+  position: relative;
+}
+
+.venue-illustration {
+  width: 90%;
+  max-width: 480px;
+  margin-inline: auto;
+  border-radius: 8px;
+  opacity: 0.95;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.venue__svg-fallback {
+  width: 90%;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.venue__svg {
+  width: 100%;
+  height: auto;
+}
+
+.venue__name {
+  font-family: var(--ff-heading);
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  font-weight: 400;
+  color: var(--clr-accent-deep);
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.venue__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.venue__info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--clr-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.venue__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ─── SECTION 3: TIMELINE ───────────────────────────────── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 460px;
+  margin-inline: auto;
+  margin-top: 2rem;
+  padding-inline: 0;
+}
+
+.timeline__item {
+  display: grid;
+  grid-template-columns: 70px 36px 1fr;
+  align-items: start;
+  gap: 0;
+  position: relative;
+}
+
+.timeline__time {
+  font-family: var(--ff-heading);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--clr-accent-deep);
+  text-align: right;
+  padding-right: 0.8rem;
+  padding-top: 0.2rem;
+  line-height: 1;
+}
+
+.timeline__connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.timeline__dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  border: 3px solid var(--clr-accent-dark);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  box-shadow: 0 0 0 5px rgba(196, 164, 132, 0.18);
+  transition: transform var(--dur-med) var(--ease-out);
+  position: relative;
+  z-index: 1;
+}
+
+.timeline__item:hover .timeline__dot {
+  transform: scale(1.4);
+}
+
+.timeline__dot--last { margin-bottom: 0; }
+
+.timeline__line {
+  width: 2px;
+  flex: 1;
+  min-height: 60px;
+  background: linear-gradient(to bottom, var(--clr-accent) 0%, transparent 100%);
+  opacity: 0.5;
+  margin-block: 2px;
+}
+
+.timeline__content {
+  padding-left: 0.8rem;
+  padding-bottom: 2.5rem;
+  text-align: left;
+}
+
+.timeline__item:last-child .timeline__content { padding-bottom: 0; }
+
+.timeline__title {
+  font-family: var(--ff-heading);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--clr-text);
+  margin-bottom: 0.2rem;
+  line-height: 1.2;
+}
+
+.timeline__desc {
+  font-size: 0.83rem;
+  color: var(--clr-text-muted);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+/* ─── SECTION 4: DRESS CODE ─────────────────────────────── */
+.dresscode__text {
+  font-family: var(--ff-body);
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+  letter-spacing: 0.06em;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.dresscode__palette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.dresscode__swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  cursor: default;
+}
+
+.dresscode__circle {
+  width: clamp(52px, 12vw, 72px);
+  height: clamp(52px, 12vw, 72px);
+  border-radius: 50%;
+  background-color: var(--color);
+  border: 2px solid var(--border);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+}
+
+.dresscode__swatch:hover .dresscode__circle {
+  transform: translateY(-5px) scale(1.08);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+}
+
+.dresscode__label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+}
+
+.dresscode__style {
+  font-family: var(--ff-heading);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--clr-accent-dark);
+  letter-spacing: 0.1em;
+}
+
+/* ─── SECTION 5: WISHES ─────────────────────────────────── */
+.wishes__block {
+  max-width: 480px;
+  margin-inline: auto;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.wishes__heart,
+.wishes__wine-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.wishes__heart {
+  animation: heartBeat 2.4s ease-in-out infinite;
+}
+
+.wishes__text {
+  font-family: var(--ff-heading);
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  font-weight: 300;
+  color: var(--clr-text);
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  font-style: italic;
+}
+
+.wishes__divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 200px;
+  margin-inline: auto;
+  margin-block: 1rem 1.5rem;
+}
+
+.wishes__divider span:first-child,
+.wishes__divider span:last-child {
+  flex: 1;
+  height: 1px;
+  background: var(--clr-accent);
+  opacity: 0.5;
+}
+
+.wishes__divider-icon {
+  font-size: 0.7rem;
+  color: var(--clr-accent);
+  flex-shrink: 0;
+}
+
+/* ─── SECTION 6: RSVP ───────────────────────────────────── */
+.rsvp__subtitle {
+  font-size: 0.88rem;
+  color: rgba(250, 249, 246, 0.6);
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+.rsvp__subtitle strong {
+  color: var(--clr-accent);
+  font-weight: 500;
+}
+
+.rsvp__form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.rsvp__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  text-align: left;
+}
+
+.rsvp__label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(250, 249, 246, 0.65);
+}
+
+.rsvp__input,
+.rsvp__select {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(196, 164, 132, 0.25);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  color: var(--clr-text-light);
+  font-family: var(--ff-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  outline: none;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.rsvp__input::placeholder {
+  color: rgba(250, 249, 246, 0.28);
+}
+
+.rsvp__input:focus,
+.rsvp__select:focus {
+  border-color: var(--clr-accent);
+  background: rgba(196, 164, 132, 0.08);
+  box-shadow: 0 0 0 3px rgba(196, 164, 132, 0.15);
+}
+
+.rsvp__select-wrapper {
+  position: relative;
+}
+
+.rsvp__select option {
+  background: var(--clr-dark);
+  color: var(--clr-text-light);
+}
+
+.rsvp__select-arrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+/* Drinks preferences styling */
+.rsvp__drinks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.4rem;
+}
+
+.rsvp__drink-option {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(196, 164, 132, 0.25);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+  user-select: none;
+}
+
+.rsvp__drink-option:hover {
+  background: rgba(196, 164, 132, 0.08);
+  border-color: var(--clr-accent);
+}
+
+.rsvp__checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.rsvp__checkbox-custom {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--clr-accent);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  background: transparent;
+}
+
+.rsvp__checkbox-custom::after {
+  content: '';
+  width: 5px;
+  height: 9px;
+  border: solid var(--clr-dark);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.2s ease;
+  margin-bottom: 2px;
+}
+
+.rsvp__checkbox:checked + .rsvp__checkbox-custom {
+  background: var(--clr-accent);
+  border-color: var(--clr-accent);
+}
+
+.rsvp__checkbox:checked + .rsvp__checkbox-custom::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.rsvp__drink-name {
+  font-family: var(--ff-body);
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--clr-text-light);
+  letter-spacing: 0.03em;
+}
+
+/* RSVP Submit button */
+.rsvp__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--clr-accent);
+  color: var(--clr-dark);
+  font-family: var(--ff-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.rsvp__btn:hover {
+  background: var(--clr-accent-dark);
+  color: #FAF9F6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196, 164, 132, 0.3);
+}
+
+.rsvp__btn:active {
+  transform: translateY(0);
+}
+
+.rsvp__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.rsvp__btn-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* RSVP Success message */
+.rsvp__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(196, 164, 132, 0.3);
+  border-radius: 6px;
+  background: rgba(196, 164, 132, 0.08);
+  animation: successFade 0.6s var(--ease-out) both;
+}
+
+.rsvp__success svg {
+  width: 40px;
+  height: 40px;
+}
+
+@keyframes successFade {
+  from { opacity: 0; transform: scale(0.92) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.rsvp__success-text {
+  font-family: var(--ff-heading);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--clr-accent);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ─── FOOTER ────────────────────────────────────────────── */
+.footer {
+  background: var(--clr-dark-sec);
+  padding-block: 3.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.footer__calligraphy {
+  font-family: var(--ff-calligraphy);
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  color: var(--clr-text-light);
+  opacity: 0.9;
+}
+
+.footer__date {
+  font-family: var(--ff-heading);
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  color: var(--clr-accent);
+}
+
+.footer__heart {
+  width: 18px;
+  height: 18px;
+  animation: heartBeat 2.4s ease-in-out infinite;
+}
+
+/* ─── RESPONSIVE TWEAKS ─────────────────────────────────── */
+
+/* ≥ 480px */
+@media (min-width: 480px) {
+  .timeline__item {
+    grid-template-columns: 90px 40px 1fr;
+  }
+
+  .timeline__time {
+    font-size: 1.75rem;
+  }
+
+  .dresscode__palette {
+    gap: 1.6rem;
+  }
+}
+
+/* ≥ 768px */
+@media (min-width: 768px) {
+  .venue-illustration {
+    width: 70%;
+  }
+
+  .timeline {
+    max-width: 520px;
+  }
+
+  .timeline__item {
+    grid-template-columns: 100px 44px 1fr;
+  }
+}
+
+/* ≥ 1024px */
+@media (min-width: 1024px) {
+  .venue__figure {
+    margin-block: 2rem 1.5rem;
+  }
+
+  .venue-illustration {
+    width: 60%;
+  }
+
+  .dresscode__circle {
+    width: 76px;
+    height: 76px;
+  }
+}
+
+/* ─── PRINT MEDIA ───────────────────────────────────────── */
+@media print {
+  .hero__scroll-indicator,
+  .rsvp__form { display: none; }
+  .hidden { opacity: 1; transform: none; }
+}
+
+/* ─── REDUCED MOTION ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hidden {
+    transition: opacity 0.3s ease;
+    transform: none;
+  }
+  .hero__heart,
+  .wishes__heart,
+  .footer__heart {
+    animation: none;
+  }
+  .hero__scroll-indicator {
+    animation: none;
+  }
+}
