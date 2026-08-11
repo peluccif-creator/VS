@@ -327,62 +327,96 @@ function initMusicPlayer() {
 }
 
 /* ─────────────────────────────────────────────────────────
-   CANVAS GOLD DUST PARTICLES
+   CONSTELLATION CANVAS (cover screen stars)
    ───────────────────────────────────────────────────────── */
-function initGoldDustCanvas() {
-  const canvas = document.getElementById("gold-dust-canvas");
+function initConstellationCanvas() {
+  const canvas = document.getElementById("constellation-canvas");
   if (!canvas) return;
 
   const ctx = canvas.getContext("2d");
-  let width, height;
-  let particles = [];
+  let W, H;
 
   function resize() {
-    width  = canvas.width  = window.innerWidth;
-    height = canvas.height = window.innerHeight;
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
-
   window.addEventListener("resize", resize);
   resize();
 
-  const particleCount = Math.min(Math.floor(window.innerWidth / 20), 45);
+  // Stars
+  const starCount = Math.min(Math.floor(W / 8), 140);
+  const stars = Array.from({ length: starCount }, () => ({
+    x: Math.random() * W,
+    y: Math.random() * H,
+    r: Math.random() * 1.4 + 0.3,
+    baseOpacity: Math.random() * 0.5 + 0.15,
+    opacity: 0,
+    phase: Math.random() * Math.PI * 2,
+    speed: Math.random() * 0.0008 + 0.0004,
+    dx: (Math.random() - 0.5) * 0.06,
+    dy: (Math.random() - 0.5) * 0.04,
+  }));
 
-  for (let i = 0; i < particleCount; i++) {
-    particles.push({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      r: Math.random() * 2.5 + 0.8,
-      dx: (Math.random() - 0.5) * 0.4,
-      dy: -Math.random() * 0.5 - 0.2,
-      opacity: Math.random() * 0.6 + 0.2,
-      pulse: Math.random() * 0.02 + 0.005,
-    });
-  }
+  // Connection lines between nearby stars
+  const MAX_DIST = 120;
 
-  function draw() {
-    ctx.clearRect(0, 0, width, height);
+  let running = true;
 
-    particles.forEach((p) => {
-      p.x += p.dx;
-      p.y += p.dy;
-      p.opacity += Math.sin(Date.now() * p.pulse) * 0.005;
+  function draw(now) {
+    if (!running) return;
+    ctx.clearRect(0, 0, W, H);
 
-      if (p.y < -10) p.y = height + 10;
-      if (p.x < -10) p.x = width + 10;
-      if (p.x > width + 10) p.x = -10;
+    // Update & draw stars
+    stars.forEach((s) => {
+      s.x += s.dx;
+      s.y += s.dy;
+      if (s.x < 0) s.x = W;
+      if (s.x > W) s.x = 0;
+      if (s.y < 0) s.y = H;
+      if (s.y > H) s.y = 0;
+
+      s.opacity = s.baseOpacity * (0.5 + 0.5 * Math.sin(now * s.speed + s.phase));
+
+      const grd = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 2.5);
+      grd.addColorStop(0, `rgba(255, 240, 180, ${s.opacity})`);
+      grd.addColorStop(1, `rgba(201, 168, 76, 0)`);
 
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(224, 192, 128, ${Math.max(0.1, Math.min(0.8, p.opacity))})`;
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = "#e8c87c";
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = grd;
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = `rgba(220, 180, 80, ${s.opacity * 0.8})`;
       ctx.fill();
     });
+
+    // Constellation lines
+    ctx.shadowBlur = 0;
+    for (let i = 0; i < stars.length; i++) {
+      for (let j = i + 1; j < stars.length; j++) {
+        const dx = stars[i].x - stars[j].x;
+        const dy = stars[i].y - stars[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MAX_DIST) {
+          const alpha = (1 - dist / MAX_DIST) * 0.06;
+          ctx.beginPath();
+          ctx.moveTo(stars[i].x, stars[i].y);
+          ctx.lineTo(stars[j].x, stars[j].y);
+          ctx.strokeStyle = `rgba(201, 168, 76, ${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
 
     requestAnimationFrame(draw);
   }
 
-  draw();
+  // Stop rendering once cover screen is dismissed
+  document.getElementById("open-envelope-btn")?.addEventListener("click", () => {
+    setTimeout(() => { running = false; }, 1500);
+  }, { once: true });
+
+  requestAnimationFrame(draw);
 }
 
 /* ─────────────────────────────────────────────────────────
@@ -421,35 +455,53 @@ function initCalendarButton() {
 }
 
 /* ─────────────────────────────────────────────────────────
-   3D ENVELOPE TILT & GYRO PARALLAX
+   3D CARD TILT (mouse parallax)
    ───────────────────────────────────────────────────────── */
 function init3DEnvelopeTilt() {
   const wrapper = document.querySelector(".envelope-screen");
-  const envelope = document.querySelector(".envelope");
-  if (!wrapper || !envelope) return;
+  const card    = document.querySelector(".envelope");
+  if (!wrapper || !card) return;
+
+  let animFrame;
+  let targetRX = 0, targetRY = 0;
+  let currentRX = 0, currentRY = 0;
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function animate() {
+    currentRX = lerp(currentRX, targetRX, 0.08);
+    currentRY = lerp(currentRY, targetRY, 0.08);
+    card.style.transform = `rotateX(${currentRX}deg) rotateY(${currentRY}deg) scale(1.015)`;
+    animFrame = requestAnimationFrame(animate);
+  }
 
   function handleMove(e) {
-    const rect = envelope.getBoundingClientRect();
+    const rect = card.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-    const x = clientX - (rect.left + rect.width / 2);
-    const y = clientY - (rect.top + rect.height / 2);
-
-    const rotateX = -(y / (rect.height / 2)) * 14;
-    const rotateY = (x / (rect.width / 2)) * 14;
-
-    envelope.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    const x = clientX - (rect.left + rect.width  / 2);
+    const y = clientY - (rect.top  + rect.height / 2);
+    targetRX = -(y / (rect.height / 2)) * 10;
+    targetRY =  (x / (rect.width  / 2)) * 10;
   }
 
   function handleReset() {
-    envelope.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+    targetRX = 0;
+    targetRY = 0;
   }
 
-  wrapper.addEventListener("mousemove", handleMove);
+  // Start smooth loop
+  animate();
+
+  wrapper.addEventListener("mousemove",  handleMove);
   wrapper.addEventListener("mouseleave", handleReset);
-  wrapper.addEventListener("touchmove", handleMove, { passive: true });
-  wrapper.addEventListener("touchend", handleReset);
+  wrapper.addEventListener("touchmove",  handleMove, { passive: true });
+  wrapper.addEventListener("touchend",   handleReset);
+
+  // Cancel on close
+  document.getElementById("open-envelope-btn")?.addEventListener("click", () => {
+    cancelAnimationFrame(animFrame);
+  }, { once: true });
 }
 
 /* ─────────────────────────────────────────────────────────
@@ -485,7 +537,7 @@ function initParallax() {
 document.addEventListener("DOMContentLoaded", () => {
   initEnvelopeScreen();
   initMusicPlayer();
-  initGoldDustCanvas();
+  initConstellationCanvas();
   initCalendarButton();
   init3DEnvelopeTilt();
 
